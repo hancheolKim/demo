@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
         header {
             background-color: #333;
             color: white;
-            padding: 10px 0;
+            padding: 15px 0;
             text-align: center;
         }
         .container {
@@ -23,11 +23,34 @@
         h2 {
             color: #333;
         }
-        .user-info {
+        .user-info, .actions {
             margin-top: 20px;
         }
         .user-info p {
             font-size: 18px;
+            color: #555;
+        }
+        .actions a {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .actions a:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -37,15 +60,29 @@
 </header>
 
 <div class="container">
-    <h2>안녕, <span th:text="${user.name}"></span>님!</h2>
+    <h2>안녕, <span th:text="${user != null ? user.name : '방문자'}"></span>님!</h2>
 
     <!-- 사용자 정보 출력 -->
-    <div class="user-info">
+    <div class="user-info" th:if="${user != null}">
         <p>아이디: <span th:text="${user.id}"></span></p>
         <p>이메일: <span th:text="${user.email}"></span></p>
         <p>가입일: <span th:text="${user.createdAt}"></span></p>
     </div>
-    <a href="/signup">로그인</a>
+
+    <!-- 로그인/회원가입 버튼 -->
+    <div class="actions" th:if="${user == null}">
+        <a href="/login">로그인</a>
+        <a href="/signup">회원가입</a>
+    </div>
+
+    <!-- 로그아웃 버튼 -->
+    <div class="actions" th:if="${user != null}">
+        <a href="/logout">로그아웃</a>
+    </div>
 </div>
+
+<footer>
+    &copy; 2024 Our Website. All Rights Reserved.
+</footer>
 </body>
 </html>
