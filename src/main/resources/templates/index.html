@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        .user-info {
+            margin-top: 20px;
+        }
+        .user-info p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to Our Website</h1>
+</header>
+
+<div class="container">
+    <h2>안녕, <span th:text="${user.name}"></span>님!</h2>
+
+    <!-- 사용자 정보 출력 -->
+    <div class="user-info">
+        <p>아이디: <span th:text="${user.id}"></span></p>
+        <p>이메일: <span th:text="${user.email}"></span></p>
+        <p>가입일: <span th:text="${user.createdAt}"></span></p>
+    </div>
+    <a href="/signup">로그인</a>
+</div>
+</body>
+</html>
