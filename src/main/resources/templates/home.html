@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("alertForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // 폼 제출을 막음
+                var alertText = document.getElementById("alertText").value; // 입력된 텍스트 가져오기
+                alert(alertText); // alert로 출력
+            });
+        });
+    </script>
 </head>
 <body>
-스프링 프로젝트 배포 성공!!!!
+<div>
+    <h1>스프링 프로젝트 배포 성공!!!!</h1>
+    <div>
+        <form action="*" method="get" id="alertForm">
+            <input type="text" id="alertText">
+            <input type="submit" value="확인">
+        </form>
+    </div>
+</div>
 </body>
 </html>
