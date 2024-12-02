@@ -10,23 +10,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @Controller
 public class DemoController {
 
     @Autowired
     private UserService userService;
 
-    // 사용자 리스트 조회
-    @RequestMapping("/home")
+    // 사용자 리스트 조회 (GET 요청)
+    @GetMapping("/home")
     @ResponseBody
-    public List<UserVO> home(HttpServletRequest request) {
+    public List<UserVO> home() {
         List<UserVO> users = userService.getAllUsers(); // 사용자 조회
         return users; // 사용자 정보 반환
     }
 
-    // 방명록에 사용자 추가
-    @RequestMapping("/addUser")
+    // 방명록에 사용자 추가 (POST 요청)
+    @PostMapping("/addUser")
     @ResponseBody
     public String addUser(@RequestParam("name") String name, @RequestParam("email") String email) {
         UserVO userVO = new UserVO();
@@ -42,3 +41,4 @@ public class DemoController {
         }
     }
 }
+
