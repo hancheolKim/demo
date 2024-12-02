@@ -20,16 +20,14 @@ public class DemoController {
     @GetMapping("/home")
     @ResponseBody // 이 어노테이션을 추가하여 반환값을 JSON으로 반환
     public UserVO home(HttpServletRequest request) {
-
-        HttpSession session = request.getSession();
-        if (session.getAttribute("id") != null) {
+        try {
             // ID가 1인 사용자 정보를 조회
             UserVO user = userService.getUser(1); // 예시: 사용자 조회
             return user; // 사용자 정보를 반환
+        } catch (Exception e) {
+            // 로그인하지 않았다면 빈 사용자 객체 반환
+            return new UserVO(); // 빈 사용자 객체를 반환할 수도 있음
         }
-
-        // 로그인하지 않았다면 빈 사용자 객체 반환
-        return new UserVO(); // 빈 사용자 객체를 반환할 수도 있음
     }
 
 
