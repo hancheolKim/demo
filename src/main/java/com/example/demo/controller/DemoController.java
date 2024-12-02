@@ -24,7 +24,6 @@ public class DemoController {
         return users; // 사용자 정보 반환
     }
 
-    // 방명록에 사용자 추가 (POST 요청)
     @PostMapping("/addUser")
     @ResponseBody
     public String addUser(@RequestParam("name") String name, @RequestParam("email") String email) {
@@ -40,5 +39,6 @@ public class DemoController {
             return "사용자 추가 실패!";
         }
     }
+
 }
 
