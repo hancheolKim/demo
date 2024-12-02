@@ -40,5 +40,16 @@ public class DemoController {
         }
     }
 
+    @PostMapping("/deleteUser")
+    @ResponseBody
+    public String deleteUser(@RequestParam("id") int id){
+        try{
+            userService.deleteUser(id);
+            return "사용자 삭제 성공!";
+        }catch(Exception e){
+            return "사용자 삭제 실패!";
+        }
+    }
+
 }
 
