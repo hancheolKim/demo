@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -17,7 +18,7 @@ public class DemoController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/home")
+    @RequestMapping("/home")
     @ResponseBody // 이 어노테이션을 추가하여 반환값을 JSON으로 반환
     public UserVO home(HttpServletRequest request) {
         try {
