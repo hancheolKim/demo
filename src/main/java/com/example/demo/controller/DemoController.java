@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class DemoController {
@@ -17,20 +18,20 @@ public class DemoController {
     private UserService userService;
 
     @GetMapping("/home")
-    public String home(Model model, HttpServletRequest request) {
+    @ResponseBody // 이 어노테이션을 추가하여 반환값을 JSON으로 반환
+    public UserVO home(HttpServletRequest request) {
 
         HttpSession session = request.getSession();
-        if(session.getAttribute("id")!= null) {
+        if (session.getAttribute("id") != null) {
             // ID가 1인 사용자 정보를 조회
-            UserVO user = userService.getUser(1);
-            System.out.println(user);
-            // Model에 사용자 정보 추가
-            model.addAttribute("user", user);
+            UserVO user = userService.getUser(1); // 예시: 사용자 조회
+            return user; // 사용자 정보를 반환
         }
 
-        // index.html을 반환
-        return "index";
+        // 로그인하지 않았다면 빈 사용자 객체 반환
+        return new UserVO(); // 빈 사용자 객체를 반환할 수도 있음
     }
+
 
     @GetMapping("/signup")
     public String insertMember(){
