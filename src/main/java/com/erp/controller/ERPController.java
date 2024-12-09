@@ -20,6 +20,11 @@ public class ERPController {
     @Autowired
     UserService userService;
 
+    @GetMapping("/")
+    public String home(){
+        return "index";
+    }
+
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> credentials) {
         String id = credentials.get("id");
