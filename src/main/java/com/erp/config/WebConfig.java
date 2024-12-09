@@ -16,7 +16,7 @@ public class WebConfig {
                         .allowedOrigins(
                                 "http://localhost:3000", // 로컬 개발 서버
                                 "https://hancheolKim.github.io", // 배포된 리액트 앱 URL
-                                "https://jddf4a56cc506dabef460bc7b93c92585.apppaas.app" // 수정된 백엔드 배포 URL
+                                "https://v49ff59fe9aafd038285c90daf79fe1a0.apppaas.app" // 수정된 백엔드 배포 URL
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE") // 허용되는 HTTP 메서드
                         .allowCredentials(true); // 인증 정보 허용 (쿠키 등)
