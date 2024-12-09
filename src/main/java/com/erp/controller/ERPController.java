@@ -13,14 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/api")
 public class ERPController {
 
     @Autowired
     UserService userService;
 
     @GetMapping("/")
-    @ResponseBody
     public String home() {
         return "index";
     }
