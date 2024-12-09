@@ -10,10 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/api")
 public class ERPController {
 
@@ -21,11 +20,13 @@ public class ERPController {
     UserService userService;
 
     @GetMapping("/")
-    public String home(){
+    @ResponseBody
+    public String home() {
         return "index";
     }
 
     @PostMapping("/login")
+    @ResponseBody
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> credentials) {
         String id = credentials.get("id");
         String password = credentials.get("password");
@@ -40,4 +41,3 @@ public class ERPController {
         }
     }
 }
-
