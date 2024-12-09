@@ -1,15 +1,16 @@
-package com.example.demo;
+package com.erp;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.example.demo")  // Controller가 위치한 패키지 추가
-public class DemoApplication {
+@MapperScan("com.erp.dao")  // UserDAO가 포함된 패키지를 지정합니다.
+public class ERPApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(ERPApplication.class, args);
 	}
 
 }

@@ -10,10 +10,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.erp</groupId>
+	<artifactId>ERP_Project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<name>ERP_Project</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -65,6 +65,19 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- MyBatis 의존성 추가 -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>3.0.3</version> <!-- MyBatis Spring Boot Starter 버전 -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.10</version> <!-- MyBatis 버전 -->
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -73,7 +86,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.erp.controller.ERPApplication</mainClass>
+				</configuration>
 			</plugin>
+
 
 			<!-- maven-compiler-plugin (Java 17 설정) -->
 			<plugin>
