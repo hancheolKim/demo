@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class ERPController {
 
     @PostMapping("/login")
-    @ResponseBody
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> credentials) {
         System.out.println("왔다고요.");
         String id = credentials.get("id");
