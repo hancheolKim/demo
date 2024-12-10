@@ -2,6 +2,7 @@ package com.erp.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -9,10 +10,11 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@RestController
+@Controller
 public class ERPController {
 
     @PostMapping("/login")
+    @ResponseBody
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> credentials) {
         System.out.println("왔다.");
         String id = credentials.get("id");

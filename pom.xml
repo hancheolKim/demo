@@ -87,7 +87,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.erp.controller.ERPApplication</mainClass>
+					<mainClass>com.erp.ERPApplication</mainClass>
 				</configuration>
 			</plugin>
 
