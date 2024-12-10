@@ -16,7 +16,7 @@ public class ERPController {
     @PostMapping("/login")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> credentials) {
-        System.out.println("왔다.");
+        System.out.println("왔다고요.");
         String id = credentials.get("id");
         String password = credentials.get("password");
 
