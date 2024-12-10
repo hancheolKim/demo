@@ -15,7 +15,7 @@ public class WebConfig {
                 registry.addMapping("/**") // 모든 경로에 대해 CORS 허용
                         .allowedOrigins(
                                 "http://localhost:3000", // 로컬 개발 서버
-                                "https://hancheolkim.github.io/react_real", // 배포된 리액트 앱 URL
+                                "https://hancheolkim.github.io", // 배포된 리액트 앱 URL
                                 "https://v49ff59fe9aafd038285c90daf79fe1a0.apppaas.app" // 수정된 백엔드 배포 URL
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE") // 허용되는 HTTP 메서드
