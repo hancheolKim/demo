@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.erp.dao.UserDAO">
+<mapper namespace="com.erp.dao.ItemDAO">
     <!-- 아이템 조회 -->
     <select id="getItemById" resultType="ItemVO">
         SELECT item_num, item_name, price, item_quantity, item_upt_date, item_notes, category_name
