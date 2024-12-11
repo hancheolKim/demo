@@ -26,17 +26,28 @@ public class ERPController {
         UserVO user = userService.getUserById(id);
 
         Map<String, Object> response = new HashMap<>();
-        if (user != null && user.getPassword().equals(password)) {
-            // 로그인 성공 시 User 정보와 함께 반환
-            response.put("success", true);
-            response.put("user_num", user.getUserNum());        // 유저의 num
-            response.put("user_id", user.getId());          // 유저의 id
-            response.put("user_status", user.getStatus());  // 유저의 status
-            return ResponseEntity.ok(response);
-        } else {
+
+        if (user == null) {
+            // 존재하지 않는 ID의 경우
             response.put("success", false);
+            response.put("error", "INVALID_ID");
+            response.put("message", "존재하지 않는 아이디입니다.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        } else if (!user.getPassword().equals(password)) {
+            // ID는 있지만 비밀번호가 일치하지 않는 경우
+            response.put("success", false);
+            response.put("error", "INVALID_PASSWORD");
+            response.put("message", "비밀번호가 일치하지 않습니다.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
+
+        // 로그인 성공 시
+        response.put("success", true);
+        response.put("user_num", user.getUserNum());        // 유저의 num
+        response.put("user_id", user.getId());              // 유저의 id
+        response.put("user_status", user.getStatus());      // 유저의 status
+        return ResponseEntity.ok(response);
     }
+
 
 }
