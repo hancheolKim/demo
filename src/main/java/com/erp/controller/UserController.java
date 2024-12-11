@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 @Controller
-public class ERPController {
+@RequestMapping("/user")
+public class UserController {
 
     @Autowired
     UserService userService;

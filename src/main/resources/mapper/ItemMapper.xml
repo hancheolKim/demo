@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.erp.dao.UserDAO">
+    <!-- 아이템 조회 -->
+    <select id="getItemById" resultType="ItemVO">
+        SELECT item_num, item_name, price, item_quantity, item_upt_date, item_notes, category_name
+        FROM Item
+        WHERE item_num = #{itemNum}
+    </select>
+
+    <!-- 아이템 리스트 조회 -->
+    <select id="getAllItems" resultType="ItemVO">
+        SELECT item_num, item_name, price, item_quantity, item_upt_date, item_notes, category_name
+        FROM Item
+    </select>
+
+    <!-- 아이템 삽입 -->
+    <insert id="insertItem" useGeneratedKeys="true" keyProperty="itemNum">
+        INSERT INTO Item (item_num, item_name, price, item_quantity, item_upt_date, item_notes, category_name)
+        VALUES (#{itemNum}, #{itemName}, #{price}, #{itemQuantity}, #{itemUptDate}, #{itemNotes}, #{categoryName})
+    </insert>
+
+    <!-- 아이템 수정 -->
+    <update id="updateItem">
+        UPDATE Item
+        SET item_name = #{itemName}, price = #{price}, item_quantity = #{itemQuantity}, item_upt_date = #{itemUptDate}, item_notes = #{itemNotes}, category_name = #{categoryName}
+        WHERE item_num = #{itemNum}
+    </update>
+
+    <!-- 아이템 삭제 -->
+    <delete id="deleteItem">
+        DELETE FROM Item
+        WHERE item_num = #{itemNum}
+    </delete>
+</mapper>
