@@ -21,7 +21,7 @@
                 ORDER BY item_num DESC
             </when>
             <when test="order == 2">
-                ORDER BY item_upt_date DESC
+                ORDER BY item_name DESC
             </when>
             <when test="order == 3">
                 ORDER BY price DESC
@@ -30,7 +30,7 @@
                 ORDER BY item_quantity DESC
             </when>
             <otherwise>
-                ORDER BY item_num DESC
+                ORDER BY item_upt_date DESC
             </otherwise>
         </choose>
     </sql>
