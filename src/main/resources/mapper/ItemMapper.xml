@@ -42,26 +42,24 @@
         select count(*) from Item
         <include refid="itemSearch"></include>
     </select>
+
     <!-- 아이템 리스트 조회 -->
-    <select id="getAllItems" resultType="ItemVO" parameterMap="map">
-        SELECT * FROM
-        (SELECT a.*,
-        rownum rnum FROM (
+    <select id="getAllItems" resultType="ItemVO" parameterType="map">
         SELECT
-            item_num,
-            item_name,
-            price,
-            item_quantity,
-            item_upt_date,
-            item_notes,
-            category_name
+        item_num,
+        item_name,
+        price,
+        item_quantity,
+        item_upt_date,
+        item_notes,
+        category_name
         FROM Item
-            <include refid="itemSearch"></include>
-            <include refid="itemOrder"></include>)a)
-        <![CDATA[
-	 	WHERE rnum >= #{start} AND rnum <= #{end}
-	 	]]>
+        <include refid="itemSearch"></include>
+        <include refid="itemOrder"></include>
+        LIMIT #{start}, #{end}
     </select>
+
+
 
     <!-- 아이템 조회 -->
     <select id="getItemById" resultType="ItemVO">

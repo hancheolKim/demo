@@ -10,10 +10,10 @@ public interface ItemService {
     ItemVO getItemById(String itemNum);
 
     // 모든 아이템 수량 조회
-    int getItemCount(Map<String,Object> filters);
+    int getItemCount(Map<String,Object> map);
 
     // 모든 아이템 조회
-    List<ItemVO> getAllItems(Map<String, Object> filters);
+    List<ItemVO> getAllItems(Map<String, Object> map);
 
     // 아이템 추가
     void insertItem(ItemVO item);

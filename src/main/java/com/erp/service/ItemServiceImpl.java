@@ -20,13 +20,13 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public int getItemCount(Map<String, Object> filters) {
-        return itemDAO.getItemCount(filters);
+    public int getItemCount(Map<String, Object> map) {
+        return itemDAO.getItemCount(map);
     }
 
     @Override
-    public List<ItemVO> getAllItems(Map<String, Object> filters) {
-        return itemDAO.getAllItems(filters);
+    public List<ItemVO> getAllItems(Map<String, Object> map) {
+        return itemDAO.getAllItems(map);
     }
 
     @Override
