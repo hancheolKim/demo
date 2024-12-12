@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ItemServiceImpl implements ItemService{
@@ -19,8 +20,13 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public List<ItemVO> getAllItems() {
-        return itemDAO.getAllItems();
+    public int getItemCount(Map<String, Object> filters) {
+        return itemDAO.getItemCount(filters);
+    }
+
+    @Override
+    public List<ItemVO> getAllItems(Map<String, Object> filters) {
+        return itemDAO.getAllItems(filters);
     }
 
     @Override

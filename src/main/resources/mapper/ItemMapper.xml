@@ -2,17 +2,72 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.erp.dao.ItemDAO">
+    <sql id="itemSearch">
+        <where>
+            <if test="keyword != null and keyword != ''">
+                <if test="keyfield == 1">
+                    item_num LIKE '%' || #{keyword} || '%'
+                </if>
+                <if test="keyfield == 2">
+                    item_name LIKE '%' || #{keyword} || '%'
+                </if>
+            </if>
+        </where>
+    </sql>
+
+    <sql id="itemOrder">
+        <choose>
+            <when test="order == 1">
+                ORDER BY item_num DESC
+            </when>
+            <when test="order == 2">
+                ORDER BY item_upt_date DESC
+            </when>
+            <when test="order == 3">
+                ORDER BY price DESC
+            </when>
+            <when test="order == 4">
+                ORDER BY item_quantity DESC
+            </when>
+            <otherwise>
+                ORDER BY item_num DESC
+            </otherwise>
+        </choose>
+    </sql>
+
+
+
+    <!-- 아이템 카운트 조회 -->
+    <select id="getItemCount" resultType="int" parameterType="map">
+        select count(*) from Item
+        <include refid="itemSearch"></include>
+    </select>
+    <!-- 아이템 리스트 조회 -->
+    <select id="getAllItems" resultType="ItemVO" parameterMap="map">
+        SELECT * FROM
+        (SELECT a.*,
+        rownum rnum FROM (
+        SELECT
+            item_num,
+            item_name,
+            price,
+            item_quantity,
+            item_upt_date,
+            item_notes,
+            category_name
+        FROM Item
+            <include refid="itemSearch"></include>
+            <include refid="itemOrder"></include>)a)
+        <![CDATA[
+	 	WHERE rnum >= #{start} AND rnum <= #{end}
+	 	]]>
+    </select>
+
     <!-- 아이템 조회 -->
     <select id="getItemById" resultType="ItemVO">
         SELECT item_num, item_name, price, item_quantity, item_upt_date, item_notes, category_name
         FROM Item
         WHERE item_num = #{itemNum}
-    </select>
-
-    <!-- 아이템 리스트 조회 -->
-    <select id="getAllItems" resultType="ItemVO">
-        SELECT item_num, item_name, price, item_quantity, item_upt_date, item_notes, category_name
-        FROM Item
     </select>
 
     <!-- 아이템 삽입 -->
