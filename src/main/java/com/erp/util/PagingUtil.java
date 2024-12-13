@@ -100,9 +100,9 @@ public class PagingUtil {
 		return page;
 	}
 	public int getStartRow() {
-		return startRow;
+		return startRow-1;
 	}
 	public int getEndRow() {
-		return endRow;
+		return endRow-1;
 	}
 }

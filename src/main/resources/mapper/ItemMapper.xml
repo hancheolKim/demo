@@ -5,16 +5,15 @@
     <sql id="itemSearch">
         <where>
             <if test="keyword != null and keyword != ''">
-                <if test="keyfield.equals('1')">
-                    item_num LIKE '%' || #{keyword} || '%'
+                <if test="keyfield == 1">
+                    item_num LIKE CONCAT('%', #{keyword}, '%')
                 </if>
-                <if test="keyfield.equals('2')">
-                    item_name LIKE '%' || #{keyword} || '%'
+                <if test="keyfield == 2">
+                    item_name LIKE CONCAT('%', #{keyword}, '%')
                 </if>
             </if>
         </where>
     </sql>
-
 
     <sql id="itemOrder">
         <choose>

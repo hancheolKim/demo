@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,39 +27,43 @@ public class ItemController {
     @GetMapping("/list")
     public ResponseEntity<Map<String, Object>> getItemList(@RequestParam(defaultValue = "1") int pageNum,
                                                            @RequestParam(defaultValue = "1") int order,
-                                                           @RequestParam(defaultValue = "") String category,
                                                            @RequestParam(defaultValue = "") String keyfield,
                                                            @RequestParam(defaultValue = "") String keyword) {
-        log.debug("Received request: pageNum={}, order={}, category={}, keyfield={}, keyword={}",
-                pageNum, order, category, keyfield, keyword);
+        // URL 디코딩을 위한 처리
+        try {
+            if (!keyword.isEmpty()) {
+                keyword = URLDecoder.decode(keyword, StandardCharsets.UTF_8.name());
+            }
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("Error decoding keyword: " + e.getMessage());
+        }
 
+        // 검색에 필요한 파라미터를 맵에 추가
         Map<String, Object> map = new HashMap<>();
-        map.put("category", category);
         map.put("keyfield", keyfield);
         map.put("keyword", keyword);
-        log.debug("Search map created: {}", map);
+        System.out.println("Search map created: " + map);
 
         // 전체, 검색 레코드 수
         int count = itemService.getItemCount(map);
-        log.debug("Total record count: {}", count);
+        System.out.println("Total record count: " + count);
 
         // 페이지 처리
-        PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 20, 10, "list",
-                "&category=" + category + "&order=" + order);
-        log.debug("PagingUtil created: startRow={}, endRow={}, page={}", page.getStartRow(), page.getEndRow(), page.getPage());
+        PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 15, 10, "list");
+        System.out.println("PagingUtil created: startRow=" + page.getStartRow() + ", endRow=" + page.getEndRow() + ", page=" + page.getPage());
 
         List<ItemVO> items = null;
         if (count > 0) {
-            log.debug("Records found, preparing to fetch items.");
+            System.out.println("Records found, preparing to fetch items.");
             map.put("order", order);
             map.put("start", page.getStartRow());
             map.put("end", page.getEndRow());
-            log.debug("Map for fetching items: {}", map);
+            System.out.println("Map for fetching items: " + map);
 
             items = itemService.getAllItems(map);
-            log.debug("Items fetched: {}", items);
+            System.out.println("Items fetched: " + items);
         } else {
-            log.debug("No records found.");
+            System.out.println("No records found.");
         }
 
         // 응답 데이터 구성
@@ -64,9 +71,10 @@ public class ItemController {
         response.put("items", items);
         response.put("page", page.getPage());
         response.put("count", count);
-        log.debug("Response data prepared: {}", response);
+        System.out.println("Response data prepared: " + response);
 
         return ResponseEntity.ok(response);
     }
+
 
 }
