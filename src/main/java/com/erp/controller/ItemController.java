@@ -49,7 +49,7 @@ public class ItemController {
         System.out.println("Total record count: " + count);
 
         // 페이지 처리
-        PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 15, 10, "list");
+        PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 15, 10, "item/list");
         System.out.println("PagingUtil created: startRow=" + page.getStartRow() + ", endRow=" + page.getEndRow() + ", page=" + page.getPage());
 
         List<ItemVO> items = null;
