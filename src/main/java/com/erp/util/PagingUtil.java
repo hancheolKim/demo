@@ -17,14 +17,15 @@ public class PagingUtil {
 			if (currentPage > totalPage) {
 				currentPage = totalPage;
 			}
+
 			// 현재 페이지의 처음과 마지막 글의 번호 가져오기
 			startRow = (currentPage - 1) * rowCount; // 0-based index로 수정
-			endRow = currentPage * rowCount - 1;     // 0-based index로 수정
+			endRow = Math.min(currentPage * rowCount - 1, count - 1); // endRow가 count - 1을 넘지 않도록 수정
 
 			// 페이지 버튼 생성
 			pageHtml = "";
 			if (pageCount > 0) {
-				// 시작 페이지와 마지막 페이지 값 구하기.
+				// 시작 페이지와 마지막 페이지 값 구하기
 				int startPage = (int) ((currentPage - 1) / pageCount) * pageCount + 1;
 				int endPage = startPage + pageCount - 1;
 				// 마지막 페이지가 전체 페이지 수보다 크면 전체 페이지 수로 설정
