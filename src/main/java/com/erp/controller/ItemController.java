@@ -61,7 +61,6 @@ public class ItemController {
         // 응답 데이터 구성
         Map<String, Object> response = new HashMap<>();
         response.put("items", items);           // 아이템 목록
-        response.put("pageHtml", page.getPageHtml()); // 생성된 페이지 버튼 HTML
         response.put("count", count);           // 전체 아이템 수
         response.put("pageNum", pageNum);      // 현재 페이지 번호
 

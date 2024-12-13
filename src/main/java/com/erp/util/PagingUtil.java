@@ -21,41 +21,6 @@ public class PagingUtil {
 			// 현재 페이지의 처음과 마지막 글의 번호 가져오기
 			startRow = (currentPage - 1) * rowCount; // 0-based index로 수정
 			endRow = Math.min(currentPage * rowCount - 1, count - 1); // endRow가 count - 1을 넘지 않도록 수정
-
-			// 페이지 버튼 생성
-			pageHtml = "";
-			if (pageCount > 0) {
-				// 시작 페이지와 마지막 페이지 값 구하기
-				int startPage = (int) ((currentPage - 1) / pageCount) * pageCount + 1;
-				int endPage = startPage + pageCount - 1;
-				// 마지막 페이지가 전체 페이지 수보다 크면 전체 페이지 수로 설정
-				if (endPage > totalPage) {
-					endPage = totalPage;
-				}
-
-				// 이전 block 페이지
-				if (currentPage > pageCount) {
-					pageHtml += "<span class='pageButton' style='cursor:pointer;' onclick='goPage(" + (startPage - 1) + ")'>[이전]</span>";
-				}
-				// 페이지 번호. 현재 페이지는 빨간색으로 강조하고 링크를 제거
-				for (int i = startPage; i <= endPage; i++) {
-					if (i > totalPage) {
-						break;
-					}
-					if (i == currentPage) {
-						pageHtml += "&nbsp;<span class='pageButton' style='color:red;'>" + i + "</span>";
-					} else {
-						pageHtml += "&nbsp;<span class='pageButton' style='cursor:pointer;' onclick='goPage(" + i + ")'>" + i + "</span>";
-					}
-					pageHtml += "&nbsp;";
-				}
-				// 다음 block 페이지
-				if (totalPage - startPage >= pageCount) {
-					pageHtml += "<span class='pageButton' style='cursor:pointer;' onclick='goPage(" + (endPage + 1) + ")'>[다음]</span>";
-				}
-			} else {
-				pageHtml = "<b>[warning]</b>pageCount는 1이상 지정해야 페이지수가 표시됩니다.";
-			}
 		}
 	}
 
@@ -67,10 +32,5 @@ public class PagingUtil {
 	// endRow 반환 (0-based index)
 	public int getEndRow() {
 		return endRow;
-	}
-
-	// 페이지 HTML 반환
-	public String getPageHtml() {
-		return pageHtml;
 	}
 }
