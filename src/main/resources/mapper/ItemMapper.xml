@@ -56,7 +56,7 @@
         FROM Item
         <include refid="itemSearch"/>
         <include refid="itemOrder"></include>
-        LIMIT #{start}, #{end}
+        LIMIT #{start}, 15
     </select>
 
 

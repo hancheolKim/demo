@@ -53,8 +53,6 @@ public class ItemController {
         if (count > 0) {
             map.put("order", order);
             map.put("start", page.getStartRow()); // 0-based index로 startRow를 설정
-            map.put("end", page.getEndRow());     // 0-based index로 endRow를 설정
-
             items = itemService.getAllItems(map);
         }
 
