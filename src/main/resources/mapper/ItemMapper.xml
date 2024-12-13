@@ -54,7 +54,7 @@
         item_notes,
         category_name
         FROM Item
-        <include refid="itemSearch"></include>
+        <include refid="itemSearch"/>
         <include refid="itemOrder"></include>
         LIMIT #{start}, #{end}
     </select>

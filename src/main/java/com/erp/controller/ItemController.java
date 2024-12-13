@@ -25,7 +25,8 @@ public class ItemController {
     public ResponseEntity<Map<String, Object>> getItemList(@RequestParam(defaultValue = "1") int pageNum,
                                                            @RequestParam(defaultValue = "1") int order,
                                                            @RequestParam(defaultValue = "") String category,
-                                                           String keyfield, String keyword) {
+                                                           @RequestParam(defaultValue = "") String keyfield,
+                                                           @RequestParam(defaultValue = "") String keyword) {
         log.debug("Received request: pageNum={}, order={}, category={}, keyfield={}, keyword={}",
                 pageNum, order, category, keyfield, keyword);
 
