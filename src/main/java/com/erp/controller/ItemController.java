@@ -49,8 +49,7 @@ public class ItemController {
         System.out.println("Total record count: " + count);
 
         // 페이지 처리
-        PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 15, 10, "react_real#/item/list");
-        System.out.println("PagingUtil created: startRow=" + page.getStartRow() + ", endRow=" + page.getEndRow() + ", page=" + page.getPage());
+        PagingUtil page = new PagingUtil(pageNum, count, 15, 10);
 
         List<ItemVO> items = null;
         if (count > 0) {
