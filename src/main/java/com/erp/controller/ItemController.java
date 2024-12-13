@@ -64,7 +64,6 @@ public class ItemController {
         response.put("pageHtml", page.getPageHtml()); // 생성된 페이지 버튼 HTML
         response.put("count", count);           // 전체 아이템 수
         response.put("pageNum", pageNum);      // 현재 페이지 번호
-        response.put("totalCount", (int) Math.ceil((double) count / 15)); // 전체 페이지 수
 
         return ResponseEntity.ok(response);
     }
