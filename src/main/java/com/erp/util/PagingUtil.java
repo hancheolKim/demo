@@ -5,6 +5,7 @@ public class PagingUtil {
 	private int endRow;      // 한 페이지에서 보여줄 게시글의 끝 번호
 	private String pageHtml; // 페이지 버튼을 포함한 HTML 문자열
 
+	// PagingUtil 생성자
 	public PagingUtil(int currentPage, int count, int rowCount, int pageCount) {
 		if (count >= 0) {
 			// 전체 페이지 수 계산
@@ -16,7 +17,7 @@ public class PagingUtil {
 			if (currentPage > totalPage) {
 				currentPage = totalPage;
 			}
-			// 현재 페이지의 처음과 마지막 글의 번호 가져오기.
+			// 현재 페이지의 처음과 마지막 글의 번호 가져오기
 			startRow = (currentPage - 1) * rowCount; // 0-based index로 수정
 			endRow = currentPage * rowCount - 1;     // 0-based index로 수정
 
@@ -35,7 +36,7 @@ public class PagingUtil {
 				if (currentPage > pageCount) {
 					pageHtml += "<span class='pageButton' style='cursor:pointer;' onclick='goPage(" + (startPage - 1) + ")'>[이전]</span>";
 				}
-				// 페이지 번호. 현재 페이지는 빨간색으로 강조하고 링크를 제거.
+				// 페이지 번호. 현재 페이지는 빨간색으로 강조하고 링크를 제거
 				for (int i = startPage; i <= endPage; i++) {
 					if (i > totalPage) {
 						break;
@@ -55,5 +56,20 @@ public class PagingUtil {
 				pageHtml = "<b>[warning]</b>pageCount는 1이상 지정해야 페이지수가 표시됩니다.";
 			}
 		}
+	}
+
+	// startRow 반환 (0-based index)
+	public int getStartRow() {
+		return startRow;
+	}
+
+	// endRow 반환 (0-based index)
+	public int getEndRow() {
+		return endRow;
+	}
+
+	// 페이지 HTML 반환
+	public String getPageHtml() {
+		return pageHtml;
 	}
 }
