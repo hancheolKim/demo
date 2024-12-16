@@ -18,16 +18,16 @@
     <sql id="itemOrder">
         <choose>
             <when test="order == 1">
-                ORDER BY item_num DESC
+                ORDER BY price ASC
             </when>
             <when test="order == 2">
-                ORDER BY item_name DESC
-            </when>
-            <when test="order == 3">
                 ORDER BY price DESC
             </when>
-            <when test="order == 4">
+            <when test="order == 3">
                 ORDER BY item_quantity DESC
+            </when>
+            <when test="order == 4">
+                ORDER BY item_quantity ASC
             </when>
             <otherwise>
                 ORDER BY item_upt_date DESC
