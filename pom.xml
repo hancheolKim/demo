@@ -21,6 +21,12 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>io.portone</groupId>
+			<artifactId>server-sdk</artifactId>
+			<version>0.10.0</version>
+		</dependency>
+
 		<!-- Spring Boot Starter Web 의존성 (RestController 사용 등) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

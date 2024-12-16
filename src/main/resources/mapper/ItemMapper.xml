@@ -49,6 +49,7 @@
         item_num,
         item_name,
         price,
+        cost_price,
         item_quantity,
         item_upt_date,
         item_notes,
@@ -86,4 +87,11 @@
         DELETE FROM Item
         WHERE item_num = #{itemNum}
     </delete>
+
+    <update id="updateItemQuantity" parameterType="map">
+        UPDATE Item
+        SET item_quantity = item_quantity - #{quantity}
+        WHERE item_num = #{itemNum}
+        AND item_quantity >= #{quantity} <!-- 수량이 충분한 경우에만 업데이트 -->
+    </update>
 </mapper>

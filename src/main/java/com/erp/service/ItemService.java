@@ -9,6 +9,8 @@ public interface ItemService {
     // 아이템 조회
     ItemVO getItemById(String itemNum);
 
+    int updateItemQuantity(String itemNum, int quantity);
+
     // 모든 아이템 수량 조회
     int getItemCount(Map<String,Object> map);
 

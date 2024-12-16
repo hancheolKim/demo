@@ -20,6 +20,11 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
+    public int updateItemQuantity(String itemNum, int quantity) {
+        return itemDAO.updateItemQuantity(itemNum,quantity);
+    }
+
+    @Override
     public int getItemCount(Map<String, Object> map) {
         return itemDAO.getItemCount(map);
     }

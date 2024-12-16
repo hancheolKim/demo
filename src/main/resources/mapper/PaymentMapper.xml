@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- src/main/resources/mapper/PaymentMapper.xml -->
+<mapper namespace="com.erp.dao.PaymentDAO">
+    <!-- 결제 정보 삽입 -->
+    <insert id="insertSales" parameterType="com.erp.vo.PaymentVO">
+        INSERT INTO Sales (
+        item_num, sales_quantity, total_price, sales_reg_date, pay_type, user_num
+        ) VALUES (
+        #{itemNum}, #{salesQuantity}, #{totalPrice}, #{salesRegDate}, #{payType}, #{userNum}
+        )
+    </insert>
+</mapper>
