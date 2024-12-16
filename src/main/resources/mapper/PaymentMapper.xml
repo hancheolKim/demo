@@ -6,9 +6,9 @@
     <!-- 결제 정보 삽입 -->
     <insert id="insertSales" parameterType="com.erp.vo.PaymentVO">
         INSERT INTO Sales (
-        item_num, sales_quantity, total_price, sales_reg_date, pay_type, user_num
+        item_num, sales_quantity, total_price, total_cost_price ,sales_reg_date, pay_type, user_num
         ) VALUES (
-        #{itemNum}, #{salesQuantity}, #{totalPrice}, #{salesRegDate}, #{payType}, #{userNum}
+        #{itemNum}, #{salesQuantity}, #{totalPrice},#{totalCostPrice},#{salesRegDate}, #{payType}, #{userNum}
         )
     </insert>
 </mapper>
