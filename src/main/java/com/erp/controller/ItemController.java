@@ -54,6 +54,7 @@ public class ItemController {
             map.put("order", order);
             map.put("start", page.getStartRow()); // 0-based index로 startRow를 설정
             items = itemService.getAllItems(map);
+            System.out.println(items);
         }
 
         // 응답 데이터 구성

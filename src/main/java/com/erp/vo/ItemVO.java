@@ -13,7 +13,7 @@ public class ItemVO {
     private String itemNum;      // item_num
     private String itemName;     // item_name
     private int price;           // price
-    private int cost_price;
+    private int costPrice;
     private int itemQuantity;    // item_quantity
     private Date itemUptDate;    // item_upt_date
     private String itemNotes;    // item_notes
