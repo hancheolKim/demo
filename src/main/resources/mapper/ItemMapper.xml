@@ -38,8 +38,6 @@
         </choose>
     </sql>
 
-
-
     <!-- 아이템 카운트 조회 -->
     <select id="getItemCount" resultType="int" parameterType="map">
         select count(*) from Item
@@ -49,21 +47,34 @@
     <!-- 아이템 리스트 조회 -->
     <select id="getAllItems" resultType="ItemVO" parameterType="map">
         SELECT
-        item_num,
-        item_name,
-        price,
-        cost_price,
-        item_quantity,
-        item_upt_date,
-        item_notes,
-        category_name
+            item_num,
+            item_name,
+            price,
+            cost_price,
+            item_quantity,
+            item_upt_date,
+            item_notes,
+            category_name
         FROM Item
         <include refid="itemSearch"/>
         <include refid="itemOrder"></include>
         LIMIT #{start}, 15
     </select>
 
+    <!--아이템 재고 조회 -->
+    <select id="getStock" resultType="ItemVO" parameterType="map">
+        select
+            Item_num,
+            Item_name,
+            cost_price,
+            item_quantity,
+            defective_quantity,
+            stock_date
+        from Item;
+        <include refid="itemSearch"/>
+        Order by stock_date
 
+    </select>
 
     <!-- 아이템 조회 -->
     <select id="getItemById" resultType="ItemVO">
@@ -72,29 +83,11 @@
         WHERE item_num = #{itemNum}
     </select>
 
-    <!-- 아이템 삽입 -->
-    <insert id="insertItem" useGeneratedKeys="true" keyProperty="itemNum">
-        INSERT INTO Item (item_num, item_name, price, item_quantity, item_upt_date, item_notes, category_name)
-        VALUES (#{itemNum}, #{itemName}, #{price}, #{itemQuantity}, #{itemUptDate}, #{itemNotes}, #{categoryName})
-    </insert>
-
-    <!-- 아이템 수정 -->
-    <update id="updateItem">
-        UPDATE Item
-        SET item_name = #{itemName}, price = #{price}, item_quantity = #{itemQuantity}, item_upt_date = #{itemUptDate}, item_notes = #{itemNotes}, category_name = #{categoryName}
-        WHERE item_num = #{itemNum}
-    </update>
-
-    <!-- 아이템 삭제 -->
-    <delete id="deleteItem">
-        DELETE FROM Item
-        WHERE item_num = #{itemNum}
-    </delete>
-
+    <!-- 수량 변경  -->
     <update id="updateItemQuantity" parameterType="map">
         UPDATE Item
         SET item_quantity = item_quantity - #{quantity}
         WHERE item_num = #{itemNum}
-        AND item_quantity >= #{quantity} <!-- 수량이 충분한 경우에만 업데이트 -->
+        AND item_quantity >= #{quantity}
     </update>
 </mapper>

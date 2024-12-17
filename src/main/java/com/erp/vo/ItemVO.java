@@ -15,7 +15,9 @@ public class ItemVO {
     private int price;           // price
     private int costPrice;
     private int itemQuantity;    // item_quantity
+    private int defectiveQuantity;
     private Date itemUptDate;    // item_upt_date
+    private Date stockDate;
     private String itemNotes;    // item_notes
     private String categoryName; // category_name
 }

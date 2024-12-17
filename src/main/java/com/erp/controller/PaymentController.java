@@ -39,6 +39,9 @@ public class PaymentController {
         this.restTemplate = restTemplate;
     }
 
+    /*********************
+     * 결제 완료
+     *********************/
     @PostMapping("/complete")
     public ResponseEntity<Map<String, Object>> completePayment(@RequestBody PaymentVO paymentVO) {
         log.info("결제 완료 정보: {}", paymentVO);

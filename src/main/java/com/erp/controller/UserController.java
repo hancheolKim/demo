@@ -18,6 +18,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    /*********************
+     * 로그인
+     *********************/
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> credentials) {
         String id = credentials.get("id");

@@ -35,6 +35,11 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
+    public List<ItemVO> getStock(Map<String, Object> map) {
+        return itemDAO.getStock(map);
+    }
+
+    @Override
     public void insertItem(ItemVO item) {
         itemDAO.insertItem(item);
     }

@@ -16,6 +16,8 @@ public interface ItemDAO {
     // 모든 아이템 조회
     List<ItemVO> getAllItems(Map<String,Object> map);
 
+    List<ItemVO> getStock(Map<String,Object> map);
+
     // 아이템 추가
     void insertItem(ItemVO item);
 
