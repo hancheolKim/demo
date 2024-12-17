@@ -173,6 +173,30 @@ public class ItemController {
     }
 
 
+    /*********************
+     * 아이템 삭제
+     *********************/
+    @PostMapping("/delItem")
+    public ResponseEntity<Map<String, Object>> deleteItem(@RequestBody Map<String, String> requestBody) {
+        try {
+            String itemNum = requestBody.get("itemNum"); // JSON에서 itemNum 추출
+
+            // 전달받은 아이템 번호로 아이템 삭제
+            itemService.deleteItem(itemNum);
+
+            // 응답 데이터
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Item deleted successfully"); // 삭제 성공 메시지로 변경
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error("Error deleting item: {}", e.getMessage());
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Error deleting item"); // 삭제 오류 메시지로 변경
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
 
 
 }

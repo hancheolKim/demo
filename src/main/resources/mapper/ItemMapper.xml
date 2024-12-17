@@ -117,7 +117,9 @@
         NOW()                  <!-- stock_date -->
         )
     </insert>
-
+    <delete id="deleteItem" parameterType="String">
+        delete from Item where item_num=#{itemNum}
+    </delete>
 
 
 </mapper>
