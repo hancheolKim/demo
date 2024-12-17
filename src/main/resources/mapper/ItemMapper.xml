@@ -90,4 +90,34 @@
         WHERE item_num = #{itemNum}
         AND item_quantity >= #{quantity}
     </update>
+
+    <!-- 카테고리 이름별 마지막 아이템 번호 조회 -->
+    <select id="getLastItemByCategory" resultType="String">
+        SELECT MAX(item_num) AS last_item_num
+        FROM Item
+        WHERE category_name = #{categoryName};
+    </select>
+
+
+    <insert id="insertItem" parameterType="ItemVO">
+        INSERT INTO Item (
+        item_num, item_name, price, cost_price, item_quantity,
+        item_upt_date, item_notes, category_name, defective_quantity, stock_date
+        )
+        VALUES (
+        #{itemNum},            <!-- 프론트엔드에서 전달받은 item_num -->
+        #{itemName},
+        #{price},      <!-- cost_price의 3배로 price 계산 -->
+        #{costPrice},
+        #{itemQuantity},
+        NOW(),                 <!-- item_upt_date -->
+        #{itemNotes},
+        #{categoryName},       <!-- category_name 저장 -->
+        #{defectiveQuantity},
+        NOW()                  <!-- stock_date -->
+        )
+    </insert>
+
+
+
 </mapper>

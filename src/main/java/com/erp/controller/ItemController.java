@@ -113,4 +113,66 @@ public class ItemController {
 
         return ResponseEntity.ok(response);
     }
+    /*********************
+     * 아이템 번호 생성
+     *********************/
+    @PostMapping("/generate-item-num")
+    public ResponseEntity<Map<String, Object>> getItemNum(@RequestParam String categoryName) {
+
+        try {
+            // 카테고리 이름에 해당하는 마지막 아이템 번호 가져오기
+            String lastItemNum = itemService.getLastItemByCategory(categoryName);
+
+            // 아이템 번호의 문자 부분(앞 2자) 추출
+            String prefix = lastItemNum.substring(0, 2); // 'EA' 같은 앞 2글자 추출
+
+            // 아이템 번호에서 숫자 부분 추출 (예: EA010에서 010 추출)
+            String numPart = lastItemNum.substring(2); // '010'
+            int newNum = Integer.parseInt(numPart) + 1; // 숫자 부분 1 증가
+
+            // 새로운 아이템 번호 생성 (추출된 문자 + 새로운 번호)
+            String newItemNum = prefix + String.format("%03d", newNum); // 예: 'EA011'
+
+            // 응답 데이터
+            Map<String, Object> response = new HashMap<>();
+            response.put("newItemNum", newItemNum);  // 생성된 아이템 번호
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error("Error generating item number: {}", e.getMessage());
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Error generating item number");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
+
+
+    /*********************
+     * 아이템 등록 페이지
+     *********************/
+    @PostMapping("/add")
+    public ResponseEntity<Map<String, Object>> addItem(@RequestBody ItemVO itemVO) {
+        try {
+            System.out.println("itemVO에 포함된 데이터 : " + itemVO);
+            // 전달받은 아이템 번호로 아이템 추가
+            itemService.insertItem(itemVO);
+
+            // 응답 데이터
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Item added successfully");
+            response.put("item", itemVO);  // 추가된 아이템 정보
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error("Error adding item: {}", e.getMessage());
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Error adding item");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
+
+
+
 }

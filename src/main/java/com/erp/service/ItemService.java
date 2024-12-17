@@ -19,6 +19,9 @@ public interface ItemService {
 
     List<ItemVO> getStock(Map<String,Object> map);
 
+    //해당 카테고리의 마지막 아이템 넘 구하기
+    String getLastItemByCategory(String categoryName);
+
     // 아이템 추가
     void insertItem(ItemVO item);
 

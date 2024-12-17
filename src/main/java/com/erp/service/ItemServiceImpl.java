@@ -40,6 +40,11 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
+    public String getLastItemByCategory(String categoryName) {
+        return itemDAO.getLastItemByCategory(categoryName);
+    }
+
+    @Override
     public void insertItem(ItemVO item) {
         itemDAO.insertItem(item);
     }
