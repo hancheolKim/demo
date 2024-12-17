@@ -11,6 +11,9 @@
                 <if test="keyfield == 2">
                     item_name LIKE CONCAT('%', #{keyword}, '%')
                 </if>
+                <if test="keyfield == 3">
+                    category_name LIKE CONCAT('%', #{keyword}, '%')
+                </if>
             </if>
         </where>
     </sql>
