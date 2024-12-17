@@ -70,10 +70,10 @@
             item_quantity,
             defective_quantity,
             stock_date
-        from Item;
+        from Item
         <include refid="itemSearch"/>
         Order by stock_date
-
+        LIMIT #{start}, 15
     </select>
 
     <!-- 아이템 조회 -->
