@@ -29,4 +29,7 @@ public interface ItemDAO {
 
     // 아이템 삭제
     void deleteItem(String itemNum);
+
+    //아이템 불량처리
+    void processDefectiveItem(String itemNum, int quantity);
 }

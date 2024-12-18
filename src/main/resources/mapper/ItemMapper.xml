@@ -121,5 +121,21 @@
         delete from Item where item_num=#{itemNum}
     </delete>
 
+    <update id="processDefectiveItem" parameterType="map">
+        UPDATE Item
+        SET
+        item_quantity = item_quantity - #{quantity},
+        defective_quantity = defective_quantity + #{quantity}
+        WHERE item_num = #{itemNum};
+    </update>
+
+    <update id="updateItem" parameterType="ItemVO">
+        UPDATE Item
+        SET
+        cost_price = #{costPrice}, item_quantity = #{itemQuantity},
+        defective_quantity = #{defectiveQuantity},
+        item_notes = #{itemNotes}, stock_date = NOW()
+        WHERE item_num = #{itemNum}
+    </update>
 
 </mapper>

@@ -197,6 +197,51 @@ public class ItemController {
         }
     }
 
+    /*********************
+     * 아이템 불량처리
+     *********************/
+    @PostMapping("/processDefective")
+    public ResponseEntity<Map<String, Object>> processDefective(@RequestBody Map<String, String> requestBody) {
+        try {
+            String itemNum = requestBody.get("itemNum"); // JSON에서 itemNum 추출
+            int quantity = Integer.parseInt(requestBody.get("quantity"));
 
+            // 불량 처리 로직 호출
+            itemService.processDefectiveItem(itemNum, quantity);
+
+            // 응답 데이터
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "불량 처리 완료"); // 처리 완료 메시지로 변경
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error("불량 처리 중 오류 발생: {}", e.getMessage());
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "불량 처리 중 오류 발생");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
+    @PostMapping("/modify")
+    public ResponseEntity<Map<String, Object>> modifyItem(@RequestBody ItemVO itemVO) {
+        try {
+            System.out.println("itemVO : " + itemVO);
+            // 아이템 업데이트
+            itemService.updateItem(itemVO);
+
+            // 응답 데이터
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);  // success 키가 true로 설정
+            response.put("message", "아이템이 성공적으로 수정되었습니다.");
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error("아이템 수정 중 오류 발생: {}", e.getMessage());
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);  // 실패시 success 키를 false로 설정
+            response.put("message", "아이템 수정 실패");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
 
 }

@@ -58,4 +58,11 @@ public class ItemServiceImpl implements ItemService{
     public void deleteItem(String itemNum) {
         itemDAO.deleteItem(itemNum);
     }
+
+    @Override
+    public void processDefectiveItem(String itemNum, int quantity) {
+        itemDAO.processDefectiveItem(itemNum,quantity);
+    }
+
+
 }
