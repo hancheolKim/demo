@@ -53,7 +53,7 @@
                 ORDER BY transaction_quantity ASC
             </when>
             <otherwise>
-                ORDER BY item_upt_date DESC
+                ORDER BY transaction_date DESC
             </otherwise>
         </choose>
     </sql>
