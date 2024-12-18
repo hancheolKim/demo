@@ -1,5 +1,6 @@
 package com.erp.service;
 
+import com.erp.vo.ItemHistoryVO;
 import com.erp.vo.ItemVO;
 
 import java.util.List;
@@ -33,4 +34,12 @@ public interface ItemService {
 
     //아이템 불량처리
     void processDefectiveItem(String itemNum, int quantity);
+
+
+    //입출고 기록 삽입 
+    void insertItemHistory(Map<String, Object> map);
+    //입출고 기록 가져오기
+    List<ItemHistoryVO> getAllItemHistory(Map<String,Object> map);
+    //입출고 기록 카운트
+    int getCountHistory();
 }

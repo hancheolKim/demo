@@ -67,12 +67,19 @@ public class PaymentController {
                     url, // 동적으로 생성된 URL
                     HttpMethod.GET, entity, String.class
             );
-            System.out.println("여기야 여기~ " + response);
             Map<String, Object> result = new HashMap<>();
             if (response.getStatusCode().is2xxSuccessful()) {
 
                 //아이템 수량 변경
                 itemService.updateItemQuantity(paymentVO.getItemNum(),paymentVO.getSalesQuantity());
+
+                //입출고 기록 저장
+                Map<String,Object> historymap = new HashMap<String,Object>();
+                historymap.put("item_num",paymentVO.getItemNum());
+                historymap.put("transaction_type", 0); // 0 = 판매
+                historymap.put("transaction_quantity",paymentVO.getSalesQuantity());
+                historymap.put("transaction_notes" , "카카오페이 결제");
+                itemService.insertItemHistory(historymap);
                 //결제 내역 추가
                 paymentService.insertSales(paymentVO);
                 log.info("결제 완료 처리 성공");

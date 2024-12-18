@@ -2,6 +2,7 @@ package com.erp.controller;
 
 import com.erp.service.ItemService;
 import com.erp.util.PagingUtil;
+import com.erp.vo.ItemHistoryVO;
 import com.erp.vo.ItemVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +76,7 @@ public class ItemController {
 
     @GetMapping("/stocklist")
     public ResponseEntity<Map<String, Object>> getStockList(@RequestParam(defaultValue = "1") int pageNum,
-                                                           @RequestParam(defaultValue = "1") int order,
+                                                           @RequestParam(defaultValue = "0") int order,
                                                            @RequestParam(defaultValue = "") String keyfield,
                                                            @RequestParam(defaultValue = "") String keyword) {
         // URL 디코딩을 위한 처리
@@ -157,6 +158,14 @@ public class ItemController {
             System.out.println("itemVO에 포함된 데이터 : " + itemVO);
             // 전달받은 아이템 번호로 아이템 추가
             itemService.insertItem(itemVO);
+
+            //입출고 기록 저장
+            Map<String,Object> historymap = new HashMap<String,Object>();
+            historymap.put("item_num",itemVO.getItemNum());
+            historymap.put("transaction_type", 1); // 1 = 입고
+            historymap.put("transaction_quantity",itemVO.getItemQuantity());
+            historymap.put("transaction_notes" , "업체입고");
+            itemService.insertItemHistory(historymap);
 
             // 응답 데이터
             Map<String, Object> response = new HashMap<>();
@@ -243,5 +252,29 @@ public class ItemController {
             return ResponseEntity.status(500).body(response);
         }
     }
+    @GetMapping("/itemHistory")
+    public ResponseEntity<Map<String, Object>> getitemHistory(@RequestParam(defaultValue = "1") int pageNum,
+                                                            @RequestParam(defaultValue = "1") int order) {
+        Map<String, Object> map = new HashMap<>();
 
+        // 전체, 검색 레코드 수
+        int count = itemService.getCountHistory();
+
+        // 페이지 처리
+        PagingUtil page = new PagingUtil(pageNum, count, 15, 10); // 한 페이지에 15개 아이템, 10개 페이지 버튼
+
+        List<ItemHistoryVO> items = null;
+        if (count > 0) {
+            map.put("start", page.getStartRow()); // 0-based index로 startRow를 설정
+            items = itemService.getAllItemHistory(map);
+        }
+
+        // 응답 데이터 구성
+        Map<String, Object> response = new HashMap<>();
+        response.put("items", items);           // 아이템 목록
+        response.put("count", count);           // 전체 아이템 수
+        response.put("pageNum", pageNum);      // 현재 페이지 번호
+
+        return ResponseEntity.ok(response);
+    }
 }

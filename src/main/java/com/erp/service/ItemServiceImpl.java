@@ -1,6 +1,7 @@
 package com.erp.service;
 
 import com.erp.dao.ItemDAO;
+import com.erp.vo.ItemHistoryVO;
 import com.erp.vo.ItemVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,21 @@ public class ItemServiceImpl implements ItemService{
     @Override
     public void processDefectiveItem(String itemNum, int quantity) {
         itemDAO.processDefectiveItem(itemNum,quantity);
+    }
+
+    @Override
+    public void insertItemHistory(Map<String, Object> map) {
+        itemDAO.insertItemHistory(map);
+    }
+
+    @Override
+    public List<ItemHistoryVO> getAllItemHistory(Map<String,Object> map) {
+        return itemDAO.getAllItemHistory(map);
+    }
+
+    @Override
+    public int getCountHistory() {
+        return itemDAO.getCountHistory();
     }
 
 

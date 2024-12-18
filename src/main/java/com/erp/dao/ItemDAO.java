@@ -1,6 +1,7 @@
 package com.erp.dao;
 
 import com.erp.vo.ItemVO;
+import com.erp.vo.ItemHistoryVO;
 import java.util.List;
 import java.util.Map;
 
@@ -32,4 +33,11 @@ public interface ItemDAO {
 
     //아이템 불량처리
     void processDefectiveItem(String itemNum, int quantity);
+
+    //입출고 기록 등록
+    void insertItemHistory(Map<String,Object> map);
+    //입출고 기록
+    List<ItemHistoryVO> getAllItemHistory(Map<String,Object> map);
+    //입출고 기록 카운트
+    int getCountHistory();
 }

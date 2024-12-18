@@ -38,6 +38,26 @@
         </choose>
     </sql>
 
+    <sql id="itemHistoryOrder">
+        <choose>
+            <when test="order == 1">
+                ORDER BY transaction_date ASC
+            </when>
+            <when test="order == 2">
+                ORDER BY transaction_date DESC
+            </when>
+            <when test="order == 3">
+                ORDER BY transaction_quantity DESC
+            </when>
+            <when test="order == 4">
+                ORDER BY transaction_quantity ASC
+            </when>
+            <otherwise>
+                ORDER BY item_upt_date DESC
+            </otherwise>
+        </choose>
+    </sql>
+
     <!-- 아이템 카운트 조회 -->
     <select id="getItemCount" resultType="int" parameterType="map">
         select count(*) from Item
@@ -137,5 +157,42 @@
         item_notes = #{itemNotes}, stock_date = NOW()
         WHERE item_num = #{itemNum}
     </update>
+
+    <!-- 데이터 삽입 -->
+    <insert id="insertItemHistory" parameterType="map">
+        INSERT INTO item_history (
+        item_num,
+        transaction_type,
+        transaction_quantity,
+        transaction_date,
+        transaction_notes
+        )
+        VALUES (
+        #{item_num},
+        #{transaction_type},
+        #{transaction_quantity},
+        NOW(),
+        #{transaction_notes}
+        )
+    </insert>
+
+    <!-- 전체 데이터 조회 -->
+    <select id="getAllItemHistory" parameterType="map" resultType="ItemHistoryVO">
+        SELECT
+        history_num,
+        item_num,
+        transaction_type,
+        transaction_quantity,
+        transaction_date,
+        transaction_notes
+        FROM
+        item_history
+        <include refid="itemHistoryOrder"></include>
+        LIMIT #{start}, 15
+    </select>
+
+    <select id="getCountHistory" resultType="int">
+        select count(*) from item_history
+    </select>
 
 </mapper>
