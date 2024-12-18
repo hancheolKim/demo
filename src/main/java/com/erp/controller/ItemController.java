@@ -254,7 +254,7 @@ public class ItemController {
     }
     @GetMapping("/itemHistory")
     public ResponseEntity<Map<String, Object>> getitemHistory(@RequestParam(defaultValue = "1") int pageNum,
-                                                            @RequestParam(defaultValue = "1") int order) {
+                                                            @RequestParam(defaultValue = "0") int order) {
         Map<String, Object> map = new HashMap<>();
 
         // 전체, 검색 레코드 수
@@ -265,6 +265,7 @@ public class ItemController {
 
         List<ItemHistoryVO> items = null;
         if (count > 0) {
+            map.put("order",order);
             map.put("start", page.getStartRow()); // 0-based index로 startRow를 설정
             items = itemService.getAllItemHistory(map);
         }
