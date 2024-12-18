@@ -113,7 +113,7 @@
         NOW(),                 <!-- item_upt_date -->
         #{itemNotes},
         #{categoryName},       <!-- category_name 저장 -->
-        #{defectiveQuantity},
+        0,
         NOW()                  <!-- stock_date -->
         )
     </insert>
