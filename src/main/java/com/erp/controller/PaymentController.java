@@ -2,6 +2,8 @@ package com.erp.controller;
 
 import com.erp.service.ItemService;
 import com.erp.service.PaymentService;
+import com.erp.util.PagingUtil;
+import com.erp.vo.ItemHistoryVO;
 import com.erp.vo.PaymentVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +12,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -99,5 +99,30 @@ public class PaymentController {
             errorResult.put("message", "결제 처리 중 오류 발생");
             return ResponseEntity.status(500).body(errorResult);
         }
+    }
+
+    @GetMapping("/getPayList")
+    public ResponseEntity<Map<String, Object>> getPayList(@RequestParam(defaultValue = "1") int pageNum) {
+        Map<String, Object> map = new HashMap<>();
+
+        // 전체, 검색 레코드 수
+        int count = paymentService.getPayCount();
+
+        // 페이지 처리
+        PagingUtil page = new PagingUtil(pageNum, count, 15, 10); // 한 페이지에 15개 아이템, 10개 페이지 버튼
+
+        List<ItemHistoryVO> items = null;
+        if (count > 0) {
+            map.put("start", page.getStartRow()); // 0-based index로 startRow를 설정
+            items = itemService.getAllItemHistory(map);
+        }
+
+        // 응답 데이터 구성
+        Map<String, Object> response = new HashMap<>();
+        response.put("items", items);           // 아이템 목록
+        response.put("count", count);           // 전체 아이템 수
+        response.put("pageNum", pageNum);      // 현재 페이지 번호
+
+        return ResponseEntity.ok(response);
     }
 }

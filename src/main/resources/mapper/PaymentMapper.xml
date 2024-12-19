@@ -11,4 +11,23 @@
         #{itemNum}, #{salesQuantity}, #{totalPrice}, #{totalCostPrice}, NOW(), #{payType}, #{userNum}
         )
     </insert>
+
+    <select id="getPayList" resultType="paymentVO" parameterType="map">
+        SELECT
+            sales_num,
+            item_num,
+            sales_quantity,
+            total_price,
+            sales_reg_date,
+            pay_type,
+            user_num,
+            total_cost_price
+        FROM Sales
+        ORDER BY sales_num DESC
+        LIMIT #{start}, 15
+    </select>
+
+    <select id="getPayCount" resultType="int">
+        select count(*) from Sales
+    </select>
 </mapper>

@@ -6,6 +6,9 @@ import com.erp.vo.PaymentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class PaymentServiceImpl implements PaymentService{
 
@@ -15,5 +18,15 @@ public class PaymentServiceImpl implements PaymentService{
     @Override
     public void insertSales(PaymentVO paymentVO) {
         paymentDAO.insertSales(paymentVO);
+    }
+
+    @Override
+    public List<PaymentVO> getPayList(Map<String, Object> map) {
+        return paymentDAO.getPayList(map);
+    }
+
+    @Override
+    public int getPayCount() {
+        return paymentDAO.getPayCount();
     }
 }
