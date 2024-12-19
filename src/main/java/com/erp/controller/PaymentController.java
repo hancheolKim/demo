@@ -50,7 +50,7 @@ public class PaymentController {
         String customerCode = "imp020855655"; // 고객사 식별 코드 (예시)
 
         // 결제 ID 추출
-        String paymentId = paymentVO.getPaymentId(); // PaymentVO에서 paymentId 추출
+        String paymentId = paymentVO.getSalesNum(); // PaymentVO에서 paymentId 추출
 
         // 결제 완료 후 처리 로직
         try {
@@ -111,10 +111,10 @@ public class PaymentController {
         // 페이지 처리
         PagingUtil page = new PagingUtil(pageNum, count, 15, 10); // 한 페이지에 15개 아이템, 10개 페이지 버튼
 
-        List<ItemHistoryVO> items = null;
+        List<PaymentVO> items = null;
         if (count > 0) {
             map.put("start", page.getStartRow()); // 0-based index로 startRow를 설정
-            items = itemService.getAllItemHistory(map);
+            items = paymentService.getPayList(map);
         }
 
         // 응답 데이터 구성
