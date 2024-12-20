@@ -21,8 +21,8 @@ public class PaymentServiceImpl implements PaymentService{
     }
 
     @Override
-    public List<PaymentVO> getPayList(Map<String, Object> map) {
-        return paymentDAO.getPayList(map);
+    public List<PaymentVO> getPayList() {
+        return paymentDAO.getPayList();
     }
 
     @Override

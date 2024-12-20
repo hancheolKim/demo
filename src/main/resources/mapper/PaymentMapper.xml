@@ -12,7 +12,7 @@
         )
     </insert>
 
-    <select id="getPayList" resultType="paymentVO" parameterType="map">
+    <select id="getPayList" resultType="paymentVO">
         SELECT
             sales_num,
             item_num,
@@ -24,7 +24,6 @@
             total_cost_price
         FROM Sales
         ORDER BY sales_num DESC
-        LIMIT #{start}, 15
     </select>
 
     <select id="getPayCount" resultType="int">

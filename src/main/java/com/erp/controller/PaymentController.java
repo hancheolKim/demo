@@ -102,27 +102,17 @@ public class PaymentController {
     }
 
     @GetMapping("/getPayList")
-    public ResponseEntity<Map<String, Object>> getPayList(@RequestParam(defaultValue = "1") int pageNum) {
-        Map<String, Object> map = new HashMap<>();
+    public ResponseEntity<Map<String, Object>> getPayList() {
+        Map<String, Object> response = new HashMap<>();
 
-        // 전체, 검색 레코드 수
-        int count = paymentService.getPayCount();
-
-        // 페이지 처리
-        PagingUtil page = new PagingUtil(pageNum, count, 15, 10); // 한 페이지에 15개 아이템, 10개 페이지 버튼
-
-        List<PaymentVO> items = null;
-        if (count > 0) {
-            map.put("start", page.getStartRow()); // 0-based index로 startRow를 설정
-            items = paymentService.getPayList(map);
-        }
+        // 전체 레코드 조회
+        List<PaymentVO> items = paymentService.getPayList(); // 모든 데이터 가져오기
 
         // 응답 데이터 구성
-        Map<String, Object> response = new HashMap<>();
-        response.put("items", items);           // 아이템 목록
-        response.put("count", count);           // 전체 아이템 수
-        response.put("pageNum", pageNum);      // 현재 페이지 번호
+        response.put("items", items);  // 아이템 목록
+        response.put("count", items.size());  // 전체 아이템 수
 
         return ResponseEntity.ok(response);
     }
+
 }
