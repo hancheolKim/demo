@@ -50,7 +50,7 @@ public class PaymentController {
         String customerCode = "imp020855655"; // 고객사 식별 코드 (예시)
 
         // 결제 ID 추출
-        String paymentId = paymentVO.getSalesNum(); // PaymentVO에서 paymentId 추출
+        String paymentId = paymentVO.getPaymentId(); // PaymentVO에서 paymentId 추출
 
         // 결제 완료 후 처리 로직
         try {
