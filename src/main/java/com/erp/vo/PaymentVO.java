@@ -13,6 +13,7 @@ import java.util.Date;
 @ToString
 public class PaymentVO {
 
+    private int salesNum;
     private String paymentId;
     private String itemNum;       // 상품 번호
     private int salesQuantity;    // 판매 수량
