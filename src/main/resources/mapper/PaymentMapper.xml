@@ -4,7 +4,7 @@
 <!-- src/main/resources/mapper/PaymentMapper.xml -->
 <mapper namespace="com.erp.dao.PaymentDAO">
     <!-- 결제 정보 삽입 -->
-    <insert id="insertSales" parameterType="com.erp.vo.PaymentVO">
+    <insert id="insertSales" parameterType="PaymentVO">
         INSERT INTO Sales (
         item_num, sales_quantity, total_price, total_cost_price, sales_reg_date, pay_type, user_num
         ) VALUES (
@@ -24,9 +24,24 @@
             total_cost_price
         FROM Sales
         ORDER BY sales_num DESC
+        <if test="">
+            where
+        </if>
     </select>
 
     <select id="getPayCount" resultType="int">
         select count(*) from Sales
     </select>
+
+    <select id="getItemNumList" resultType="ItemVO">
+        select item_num, item_name, price, cost_price,  item_quantity from Item
+    </select>
+
+    <insert id="selfInsertSales" parameterType="PaymentVO">
+        INSERT INTO Sales (
+        item_num, sales_quantity, total_price, total_cost_price, sales_reg_date, pay_type, user_num
+        ) VALUES (
+        #{itemNum}, #{salesQuantity}, #{totalPrice}, #{totalCostPrice}, #{salesRegDate}, #{payType}, #{userNum}
+        )
+    </insert>
 </mapper>

@@ -1,13 +1,12 @@
 package com.erp.service;
 
-import com.erp.dao.ItemDAO;
 import com.erp.dao.PaymentDAO;
+import com.erp.vo.ItemVO;
 import com.erp.vo.PaymentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class PaymentServiceImpl implements PaymentService{
@@ -28,5 +27,15 @@ public class PaymentServiceImpl implements PaymentService{
     @Override
     public int getPayCount() {
         return paymentDAO.getPayCount();
+    }
+
+    @Override
+    public List<ItemVO> getItemNumList() {
+        return paymentDAO.getItemNumList();
+    }
+
+    @Override
+    public void selfInsertSales(PaymentVO paymentVO) {
+        paymentDAO.selfInsertSales(paymentVO);
     }
 }

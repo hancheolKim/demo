@@ -4,14 +4,13 @@ import com.erp.service.ItemService;
 import com.erp.service.PaymentService;
 import com.erp.util.PagingUtil;
 import com.erp.vo.ItemHistoryVO;
+import com.erp.vo.ItemVO;
 import com.erp.vo.PaymentVO;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -113,6 +112,31 @@ public class PaymentController {
         response.put("count", items.size());  // 전체 아이템 수
 
         return ResponseEntity.ok(response);
+    }
+
+    //결제내역 추가 가능한 아이템넘 반환
+    @GetMapping("/getItemNumQuantityList")
+    public ResponseEntity<Map<String,Object>> getItemNumQuantityList(){
+        Map<String,Object> response = new HashMap<String,Object>();
+
+        List<ItemVO> items = paymentService.getItemNumList();
+        response.put("items",items);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/selfInsert")
+    public ResponseEntity<Map<String, Object>> selfInsert(@RequestBody PaymentVO paymentVO) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            // PaymentVO 객체를 처리하는 로직 (서비스 호출 등)
+            paymentService.selfInsertSales(paymentVO);
+            response.put("message", "저장 성공");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            // 예외 처리
+            response.put("message", "저장 실패: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
 
 }
