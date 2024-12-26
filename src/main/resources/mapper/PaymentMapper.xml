@@ -24,9 +24,6 @@
             total_cost_price
         FROM Sales
         ORDER BY sales_num DESC
-        <if test="">
-            where
-        </if>
     </select>
 
     <select id="getPayCount" resultType="int">
