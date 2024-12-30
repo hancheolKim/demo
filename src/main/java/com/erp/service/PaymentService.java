@@ -4,7 +4,6 @@ import com.erp.vo.ItemVO;
 import com.erp.vo.PaymentVO;
 
 import java.util.List;
-import java.util.Map;
 
 public interface PaymentService {
     void insertSales(PaymentVO paymentVO); // 결제 정보 삽입

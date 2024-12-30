@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.erp.dao.ProjectProgressDAO">
+    <!-- 모든 진행 상태 리스트 조회 -->
+    <select id="getAllProgress" resultType="com.erp.vo.ProjectProgressVO">
+        SELECT * FROM project_progress;
+    </select>
+
+    <!-- 특정 ID로 진행 상태 조회 -->
+    <select id="getProgressById" parameterType="int" resultType="com.erp.vo.ProjectProgressVO">
+        SELECT * FROM project_progress WHERE task_id = #{taskId};
+    </select>
+
+    <!-- 진행 상태 추가 -->
+    <insert id="addProgress" parameterType="com.erp.vo.ProjectProgressVO">
+        INSERT INTO project_progress (task_name, task_status, completion_percentage)
+        VALUES (#{taskName}, #{taskStatus}, #{completionPercentage});
+    </insert>
+
+    <!-- 진행 상태 업데이트 -->
+    <update id="updateProgress" parameterType="com.erp.vo.ProjectProgressVO">
+        UPDATE project_progress
+        SET task_name = #{taskName}, task_status = #{taskStatus}, completion_percentage = #{completionPercentage}
+        WHERE task_id = #{taskId};
+    </update>
+
+    <!-- 진행 상태 삭제 -->
+    <delete id="deleteProgress" parameterType="int">
+        DELETE FROM project_progress WHERE task_id = #{taskId};
+    </delete>
+
+</mapper>
