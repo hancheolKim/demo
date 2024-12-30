@@ -19,7 +19,6 @@ public class ProjectProgressController {
     // 모든 진행 상태 조회
     @GetMapping("/all")
     public List<ProjectProgressVO> getAllProgress() {
-        log.info("되자나..");
         return projectProgressService.getAllProgress();
     }
 
