@@ -4,9 +4,13 @@ import com.erp.service.ProjectProgressService;
 import com.erp.vo.ProjectProgressVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -31,18 +35,20 @@ public class ProjectProgressController {
 
     // 진행 상태 추가
     @PostMapping("/add")
-    public String addProgress(@RequestBody ProjectProgressVO progress) {
+    public Map<String, String> addProgress(@RequestBody ProjectProgressVO progress) {
         int result = projectProgressService.addProgress(progress);
-        if (result > 0) {
-            return "Progress added successfully!";
-        } else {
-            return "Failed to add progress!";
-        }
+        Map<String, String> response = new HashMap<>();
+        response.put("status", result > 0 ? "success" : "fail");
+        response.put("message", result > 0 ? "Progress added successfully!" : "Failed to add progress!");
+        return response;
     }
+
+
 
     // 진행 상태 수정
     @PutMapping("/update")
     public String updateProgress(@RequestBody ProjectProgressVO progress) {
+        System.out.println(progress);
         int result = projectProgressService.updateProgress(progress);
         if (result > 0) {
             return "Progress updated successfully!";
