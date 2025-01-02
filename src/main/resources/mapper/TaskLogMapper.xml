@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.erp.dao.TaskLogDAO">
+
+    <!-- Task log 리스트 가져오기 (최근 다섯 개) -->
+    <select id="getRecentTaskLogs" resultType="com.erp.vo.TaskLogVO">
+        SELECT
+        log_id AS logId,
+        task_id AS taskId,
+        task_name AS taskName,
+        title,
+        description,
+        task_date AS taskDate
+        FROM
+        task_log
+        ORDER BY
+        task_date DESC
+        LIMIT 5
+    </select>
+
+    <!-- Task log 리스트 가져오기 (페이징 처리) -->
+    <select id="getTaskLogsByPage" resultType="com.erp.vo.TaskLogVO">
+        SELECT
+        log_id AS logId,
+        task_id AS taskId,
+        task_name AS taskName,
+        title,
+        description,
+        task_date AS taskDate
+        FROM
+        task_log
+        ORDER BY
+        task_date DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <!-- Task log 상세 -->
+    <select id="getTaskLogById" resultType="com.erp.vo.TaskLogVO">
+        SELECT
+        log_id AS logId,
+        task_id AS taskId,
+        task_name AS taskName,
+        title,
+        description,
+        task_date AS taskDate
+        FROM
+        task_log
+        WHERE
+        log_id = #{logId}
+    </select>
+
+    <!-- Task log 추가 -->
+    <insert id="insertTaskLog" parameterType="com.erp.vo.TaskLogVO" useGeneratedKeys="true" keyProperty="logId">
+        INSERT INTO task_log (task_id, task_name, title, description, task_date)
+        VALUES (#{taskId}, #{taskName}, #{title}, #{description}, #{taskDate})
+    </insert>
+
+    <!-- Task log 수정 -->
+    <update id="updateTaskLog" parameterType="com.erp.vo.TaskLogVO">
+        UPDATE task_log
+        SET
+        task_id = #{taskId},
+        task_name = #{taskName},
+        title = #{title},
+        description = #{description},
+        task_date = #{taskDate}
+        WHERE
+        log_id = #{logId}
+    </update>
+
+    <!-- Task log 삭제 -->
+    <delete id="deleteTaskLog">
+        DELETE FROM task_log
+        WHERE
+        log_id = #{logId}
+    </delete>
+
+</mapper>
