@@ -16,7 +16,6 @@
         task_log
         ORDER BY
         task_date DESC
-        LIMIT 5
     </select>
 
     <!-- Task log 리스트 가져오기 (페이징 처리) -->
