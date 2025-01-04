@@ -12,6 +12,7 @@
         title,
         description,
         task_date AS taskDate
+        upt_date AS uptDate
         FROM
         task_log
         ORDER BY
