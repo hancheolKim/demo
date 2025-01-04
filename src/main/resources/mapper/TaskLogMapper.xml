@@ -27,6 +27,7 @@
         title,
         description,
         task_date AS taskDate
+        upt_date AS uptDate
         FROM
         task_log
         ORDER BY
@@ -43,6 +44,7 @@
         title,
         description,
         task_date AS taskDate
+        upt_date AS uptDate
         FROM
         task_log
         WHERE
@@ -63,7 +65,7 @@
         task_name = #{taskName},
         title = #{title},
         description = #{description},
-        task_date = #{taskDate}
+        upt_date = NOW()
         WHERE
         log_id = #{logId}
     </update>

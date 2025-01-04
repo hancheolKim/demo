@@ -17,4 +17,5 @@ public class TaskLogVO {
     private String title;
     private String description;
     private Date taskDate;
+    private Date uptDate;
 }
