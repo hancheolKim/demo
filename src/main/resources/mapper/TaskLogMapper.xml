@@ -11,7 +11,7 @@
         task_name AS taskName,
         title,
         description,
-        task_date AS taskDate
+        task_date AS taskDate,
         upt_date AS uptDate
         FROM
         task_log
