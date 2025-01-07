@@ -46,6 +46,7 @@ public class UserController {
         // 로그인 성공 시
         response.put("success", true);
         response.put("user_num", user.getUserNum());        // 유저의 num
+        response.put("user_name",user.getUserName());
         response.put("user_id", user.getId());              // 유저의 id
         response.put("user_status", user.getStatus());      // 유저의 status
         return ResponseEntity.ok(response);

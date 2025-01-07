@@ -4,20 +4,20 @@
 <mapper namespace="com.erp.dao.UserDAO">
     <!-- 사용자 추가 -->
     <insert id="insertUser">
-        INSERT INTO User (id, password, status)
-        VALUES (#{id}, #{password}, #{status})
+        INSERT INTO User (id, password, status, user_name, email)
+        VALUES (#{id}, #{password}, #{status}, #{userName}, #{email})
     </insert>
 
     <!-- 사용자 ID로 조회 -->
     <select id="getUserById" resultType="UserVO">
-        SELECT user_num, id, password, status
+        SELECT user_num, id, password, status, user_name, email
         FROM User
         WHERE id = #{id}
     </select>
 
     <!-- 전체 사용자 조회 -->
     <select id="getAllUsers" resultType="UserVO">
-        SELECT user_num, id, password, status
+        SELECT user_num, id, password, status, user_name, email
         FROM User
     </select>
 
